@@ -1,21 +1,157 @@
+/* globals.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* 🌞 Light Mode */
+  --bg-light: #f6f5ed;
+  --text-light: #2d2d2d;
+  --primary-light: #a59d84;
+  --secondary-light: #c1baa1;
+  --accent-light: #f5f4ea;
+
+  --sidebar-bg-light: #ecebde;
+  --sidebar-border-light: #d7d3bf;
+  --header-bg-light: #a59d84;
+  --header-text-light: #f6f5ed;
+
+  --chat-bg-sent-light: #d7d3bf;
+  --chat-bg-received-light: #ecebde;
+  --chat-text-sent-light: #2d2d2d;
+  --chat-text-received-light: #4a4a4a;
+
+  --input-bg-light: #f6f5ed;
+  --input-border-light: #c1baa1;
+  --input-text-light: #2d2d2d;
+  --input-placeholder-light: #a59d84;
+
+  --card-bg-light: #f7f6e9;
+  --card-border-light: #dddcd6;
+  --card-border-secondary-light: #d7d3bf;
+  --card-shadow-light: rgba(0, 0, 0, 0.1);
+
+  --button-bg-light: #a59d84;
+  --button-border-light: #c1baa1;
+  --button-text-light: #f6f5ed;
+  --button-hover-light: #c1baa1; 
+
+  /* 🌙 Dark Mode */
+  --bg-dark: #1e1e1e;
+  --text-dark: #ededed;
+  --primary-dark: #8c846e;
+  --secondary-dark: #a59d84;
+  --accent-dark: #c1baa1;
+
+  --sidebar-bg-dark: #2a2a2a;
+  --sidebar-border-dark: #3d3d3d;
+  --header-bg-dark: #8c846e;
+  --header-text-dark: #f6f5ed;
+
+  --chat-bg-sent-dark: #3d3d3d;
+  --chat-bg-received-dark: #2a2a2a;
+  --chat-text-sent-dark: #ededed;
+  --chat-text-received-dark: #bdbdbd;
+
+  --input-bg-dark: #2a2a2a;
+  --input-border-dark: #3d3d3d;
+  --input-text-dark: #ededed;
+  --input-placeholder-dark: #a59d84;
+
+  --card-bg-dark: #2a2a2a;
+  --card-border-dark: #303030;
+  --card-border-secondary-dark: #3d3d3d;
+  --card-shadow-dark: rgba(0, 0, 0, 0.3);
+
+  --button-bg-dark: #8c846e;
+  --button-border-dark: #a59d84;
+  --button-text-dark: #ededed;
+  --button-hover-dark: #a59d84;
+
+  /* 🔔 Notifications */
+  --notif-bg-light: #ef4444;
+  --notif-text-light: white;
+  --notif-bg-dark: #b91c1c;
+  --notif-text-dark: white;
+
+  /* ✅ Status Indicators */
+  --online: #22c55e;
+  --away: #facc15;
+  --offline: #d1d5db;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* 🌙 Dark Mode Styles */
+[data-theme="dark"] {
+  --bg: var(--bg-dark);
+  --text: var(--text-dark);
+  --primary: var(--primary-dark);
+  --secondary: var(--secondary-dark);
+  --accent: var(--accent-dark);
+
+  --sidebar-bg: var(--sidebar-bg-dark);
+  --sidebar-border: var(--sidebar-border-dark);
+  --header-bg: var(--header-bg-dark);
+  --header-text: var(--header-text-dark);
+
+  --chat-bg-sent: var(--chat-bg-sent-dark);
+  --chat-bg-received: var(--chat-bg-received-dark);
+  --chat-text-sent: var(--chat-text-sent-dark);
+  --chat-text-received: var(--chat-text-received-dark);
+
+  --input-bg: var(--input-bg-dark);
+  --input-border: var(--input-border-dark);
+  --input-text: var(--input-text-dark);
+  --input-placeholder: var(--input-placeholder-dark);
+
+  --card-bg: var(--card-bg-dark);
+  --card-border: var(--card-border-dark);
+  --card-shadow: var(--card-shadow-dark);
+
+  --button-bg: var(--button-bg-dark);
+  --button-border: var(--button-border-dark);
+  --button-text: var(--button-text-dark);
+  --button-hover: var(--button-hover-dark);
+
+  --notif-bg: var(--notif-bg-dark);
+  --notif-text: var(--notif-text-dark);
+}
+
+/* 🌞 Light Mode Styles (Default) */
+[data-theme="light"] {
+  --bg: var(--bg-light);
+  --text: var(--text-light);
+  --primary: var(--primary-light);
+  --secondary: var(--secondary-light);
+  --accent: var(--accent-light);
+
+  --sidebar-bg: var(--sidebar-bg-light);
+  --sidebar-border: var(--sidebar-border-light);
+  --header-bg: var(--header-bg-light);
+  --header-text: var(--header-text-light);
+
+  --chat-bg-sent: var(--chat-bg-sent-light);
+  --chat-bg-received: var(--chat-bg-received-light);
+  --chat-text-sent: var(--chat-text-sent-light);
+  --chat-text-received: var(--chat-text-received-light);
+
+  --input-bg: var(--input-bg-light);
+  --input-border: var(--input-border-light);
+  --input-text: var(--input-text-light);
+  --input-placeholder: var(--input-placeholder-light);
+
+  --card-bg: var(--card-bg-light);
+  --card-border: var(--card-border-light);
+  --card-shadow: var(--card-shadow-light);
+
+  --button-bg: var(--button-bg-light);
+  --button-border: var(--button-border-light);
+  --button-text: var(--button-text-light);
+  --button-hover: var(--button-hover-light);
+
+  --notif-bg: var(--notif-bg-light);
+  --notif-text: var(--notif-text-light);
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Quicksand, Arial, Helvetica, sans-serif;
 }
