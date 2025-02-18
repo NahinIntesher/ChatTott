@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import logo from "../../../public/images/ChatTottLogo.png";
-import Input from "../../componets/ui/Input";
+import Input from "../../components/ui/Input";
 import Link from "next/link";
 
 type SignupFormInputs = {

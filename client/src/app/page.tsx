@@ -5,10 +5,10 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { FaSignOutAlt, FaUserCircle } from "react-icons/fa";
-import ThemeSwitcher from "@/componets/ui/ThemeSwitcherButton";
+import ThemeSwitcher from "@/components/ui/ThemeSwitcherButton";
 import logo from "/public/images/ChatTottLogo.png";
-import SearchBox from "@/componets/ui/SearchBar";
-import ChatListBox from "@/componets/ui/ChatListBox";
+import SearchBox from "@/components/ui/SearchBar";
+import ChatListBox from "@/components/ui/ChatListBox";
 
 const Home = () => {
   const [mounted, setMounted] = useState(false);
