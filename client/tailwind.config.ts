@@ -7,11 +7,10 @@ const config: Config = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   mode: "jit",
-  darkMode: "class",
+  darkMode: "class", // Using class-based dark mode
   theme: {
     extend: {
       colors: {
-        // for login and signup page only
         "login-box-bg": "var(--bg-light)",
         "card-border-light": "var(--card-border-light)",
         "button-bg-light": "var(--button-bg-light)",

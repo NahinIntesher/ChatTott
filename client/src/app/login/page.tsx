@@ -26,7 +26,7 @@ const Login = () => {
     if (data.email === "nahin@gmail.com" && data.password === "123456") {
       setErrorMessage(null);
       console.log("Login successful, redirecting..."); // Debugging
-      router.push("/");
+      router.push("/chat");
     } else {
       console.log("Invalid credentials"); // Debugging
       setErrorMessage("Invalid email or password");
@@ -35,8 +35,7 @@ const Login = () => {
 
   return (
     <div className="bg-[#f7f6e9] w-screen min-h-screen flex justify-center items-center px-4 text-black">
-      {/* Login Box */}
-      <div className="bg-login-box-bg border border-card-border-light px-6 py-8 sm:px-8 sm:py-10 w-full sm:w-[90%] md:w-[75%] lg:w-[50%] xl:w-[40%] max-w-md rounded-xl shadow-lg">
+      <div className="bg-login-box-bg border border-card-border-light px-6 py-8 sm:px-8 sm:py-10 rounded-xl shadow-lg">
         {/* Logo */}
         <div className="flex justify-center">
           <Image src={logo} alt="ChatTott" width={70} height={70} />
@@ -77,12 +76,12 @@ const Login = () => {
         </form>
 
         {/* Signup Link */}
-        <p className="text-center mt-2 text-sm">
+        <div className="text-center mt-2 text-sm">
           Don't have an account?{" "}
-          <Link href="/signup" className="text-primary underline font-semibold">
+          <Link href="/signup" className="underline font-semibold">
             Signup
           </Link>
-        </p>
+        </div>
       </div>
     </div>
   );

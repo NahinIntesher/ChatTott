@@ -1,10 +1,9 @@
-/* globals.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* 🌞 Light Mode */
 :root {
-  /* 🌞 Light Mode */
   --bg-light: #f6f5ed;
   --text-light: #2d2d2d;
   --primary-light: #a59d84;
@@ -34,7 +33,7 @@
   --button-bg-light: #a59d84;
   --button-border-light: #c1baa1;
   --button-text-light: #f6f5ed;
-  --button-hover-light: #c1baa1; 
+  --button-hover-light: #c1baa1;
 
   /* 🌙 Dark Mode */
   --bg-dark: #1e1e1e;
@@ -64,7 +63,7 @@
   --card-shadow-dark: rgba(0, 0, 0, 0.3);
 
   --button-bg-dark: #8c846e;
-  --button-border-dark: #a59d84;
+  --button-border-dark: #c1baa1;
   --button-text-dark: #ededed;
   --button-hover-dark: #a59d84;
 
@@ -152,6 +151,8 @@
   --notif-text: var(--notif-text-light);
 }
 
+/* Apply global styles */
 body {
   font-family: Quicksand, Arial, Helvetica, sans-serif;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
 }

@@ -1,8 +1,16 @@
 import { useTheme } from "next-themes";
+import { useEffect } from "react";
 import { FaMoon, FaSun } from "react-icons/fa";
 
 const ThemeSwitcher = () => {
   const { theme, setTheme } = useTheme();
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme) {
+      setTheme(savedTheme);
+    }
+  }, [setTheme]);
 
   const handleThemeChange = () => {
     const newTheme = theme === "dark" ? "light" : "dark";
@@ -14,16 +22,16 @@ const ThemeSwitcher = () => {
 
   return (
     <button
-      onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-      className="p-2 rounded-full transition-colors duration-300"
+      onClick={handleThemeChange}
+      className="p-2 rounded-full"
       style={{
-        backgroundColor: theme === "dark" ? "#e1e1e1" : "#e1e1e1",
+        backgroundColor: theme === "dark" ? "#484848" : "#000000",
       }}
     >
       {theme === "dark" ? (
-        <FaSun size={24} className="text-black" />
+        <FaSun size={24} className="text-yellow-300" />
       ) : (
-        <FaMoon size={24} className="text-black" />
+        <FaMoon size={24} className="text-white" />
       )}
     </button>
   );

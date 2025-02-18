@@ -1,8 +1,9 @@
 import React, { Dispatch, SetStateAction } from "react";
 import { useRouter } from "next/navigation";
-
 import { FaUserCircle } from "react-icons/fa";
 import router from "next/router";
+import Image from "next/image";
+const avater = "/images/avater.jpg";
 interface ChatListBoxProps {
   chat: {
     id: number;
@@ -11,11 +12,11 @@ interface ChatListBoxProps {
     time: string;
     unread: number;
   };
-  setSelectedChat: Dispatch<SetStateAction<null>>;
+  setSelectedChat: Dispatch<SetStateAction<number | null>>;
 }
 
 const ChatListBox: React.FC<ChatListBoxProps> = ({ chat, setSelectedChat }) => {
-  const handleChatClick = (chatId: any) => {
+  const handleChatClick = (chatId: number) => {
     if (window.innerWidth < 768) {
       // Redirect on small screens
       router.push(`/chat/${chatId}`);
@@ -24,15 +25,20 @@ const ChatListBox: React.FC<ChatListBoxProps> = ({ chat, setSelectedChat }) => {
       setSelectedChat(chatId);
     }
   };
+
   return (
     <div
       key={chat.id}
       onClick={() => handleChatClick(chat.id)}
       className="flex items-center p-4 hover:bg-gray-100 dark:hover:bg-gray-800 cursor-pointer"
     >
-      <div className="flex-shrink-0">
-        <FaUserCircle size={40} className="text-text" />
-      </div>
+      <Image
+        src={avater}
+        alt="Avatar"
+        width={40}
+        height={40}
+        className="rounded-full"
+      />
       <div className="ml-4 flex-1">
         <div className="flex justify-between items-start">
           <h3 className="font-semibold">{chat.name}</h3>
