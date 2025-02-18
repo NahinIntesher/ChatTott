@@ -11,6 +11,7 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        // for login and signup page only
         "login-box-bg": "var(--bg-light)",
         "card-border-light": "var(--card-border-light)",
         "button-bg-light": "var(--button-bg-light)",
@@ -25,8 +26,11 @@ const config: Config = {
         sidebar: "var(--sidebar-bg)",
         header: "var(--header-bg)",
         notif: "var(--notif-bg)",
+        "card-bg": "var(--card-bg)",
+        "card-border": "var(--card-border)",
         border: "var(--border)",
         button: "var(--button-bg)",
+        "button-border": "var(--button-border)",
         "button-hover": "var(--button-hover)",
       },
     },

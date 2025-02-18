@@ -13,14 +13,14 @@ const Inputt = forwardRef<HTMLInputElement, InputProps>(
           {label}
         </label>
         <input
-          className={`py-2 px-2 border rounded-lg w-full focus:ring-1 focus:outline-none focus:border-button-hover-light ${
-            error ? "border-red-600" : "border-gray-500"
+          className={`py-2 px-2 border bg-bg rounded-lg w-full text-sm focus:ring-0 focus:outline-none focus:border-button-hover ${
+            error ? "border-red-600" : "border-gray-300"
           } ${className}`}
           ref={ref}
           {...props}
         />
         {error && (
-          <p className="mt-1.5 text-xs text-red-600 font-medium">{error}</p>
+          <p className="mt-1 text-xs text-red-600 font-thin">{error}</p>
         )}
       </div>
     );

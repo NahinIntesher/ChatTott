@@ -4,15 +4,27 @@ import { FaMoon, FaSun } from "react-icons/fa";
 const ThemeSwitcher = () => {
   const { theme, setTheme } = useTheme();
 
+  const handleThemeChange = () => {
+    const newTheme = theme === "dark" ? "light" : "dark";
+    setTheme(newTheme);
+
+    // Save the theme preference to localStorage
+    localStorage.setItem("theme", newTheme);
+  };
+
   return (
     <button
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
       className="p-2 rounded-full transition-colors duration-300"
       style={{
-        backgroundColor: theme === "dark" ? "#e1e1e1" : "#e1e1e1", 
+        backgroundColor: theme === "dark" ? "#e1e1e1" : "#e1e1e1",
       }}
     >
-      {theme === "dark" ? <FaSun size={24} className="text-black"/> : <FaMoon size={24} className="text-black"/>}
+      {theme === "dark" ? (
+        <FaSun size={24} className="text-black" />
+      ) : (
+        <FaMoon size={24} className="text-black" />
+      )}
     </button>
   );
 };

@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import logo from "../../../public/images/ChatTottLogo.png";
-import Input from "../../componets/ui/Input";
+import Input from "@/components/ui/Input";
 import Link from "next/link";
 
 type LoginFormInputs = {
@@ -34,8 +34,9 @@ const Login = () => {
   };
 
   return (
-    <div className="bg-[#f7f6e9] w-screen h-screen flex justify-center items-center">
-      <div className="bg-login-box-bg border border-card-border-light px-7 py-10 rounded-xl shadow-lg">
+    <div className="bg-[#f7f6e9] w-screen min-h-screen flex justify-center items-center px-4 text-black">
+      {/* Login Box */}
+      <div className="bg-login-box-bg border border-card-border-light px-6 py-8 sm:px-8 sm:py-10 w-full sm:w-[90%] md:w-[75%] lg:w-[50%] xl:w-[40%] max-w-md rounded-xl shadow-lg">
         {/* Logo */}
         <div className="flex justify-center">
           <Image src={logo} alt="ChatTott" width={70} height={70} />

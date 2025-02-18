@@ -11,21 +11,15 @@ import SearchBox from "@/components/ui/SearchBar";
 import ChatListBox from "@/components/ui/ChatListBox";
 
 const Home = () => {
-  const [mounted, setMounted] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedChat, setSelectedChat] = useState(null); // Track selected chat (for large screens)
+  const [selectedChat, setSelectedChat] = useState(null);
   const router = useRouter();
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   const handleLogout = () => {
     console.log("Logging out...");
     router.push("/login");
   };
 
-  // Sample chat data - in a real app, this would come from your backend
   const chats = [
     {
       id: 1,
