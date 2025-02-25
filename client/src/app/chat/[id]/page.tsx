@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useParams } from "next/navigation";
 import Image from "next/image";
 
-const avater = "/images/avater.jpg"; 
+const avater = "/images/avater.jpg";
 
 const chats = [
   { id: 1, name: "John Doe" },
@@ -50,7 +50,7 @@ const ChatPage: React.FC = () => {
   return (
     <div className="flex flex-col h-screen w-full bg-bg text-text">
       {/* Chat Header */}
-      <div className="flex items-center gap-3 px-5 py-3 shadow-md">
+      <div className="flex items-center gap-3 p-5 shadow-md">
         <Image
           src={avater}
           alt="Avatar"
@@ -84,17 +84,17 @@ const ChatPage: React.FC = () => {
       </div>
 
       {/* Chat Input */}
-      <div className="flex items-center p-3 border-t border-gray-300 bg-white dark:bg-gray-800">
+      <div className="flex items-center p-3 border-t border-gray-300 bg-bg">
         <input
           type="text"
-          className="flex-1 p-2 border rounded-lg outline-none bg-gray-100 dark:bg-gray-700 text-black dark:text-white"
+          className="flex-1 p-2 border rounded-lg outline-none bg-bg text-black dark:text-white"
           placeholder="Type a message..."
           value={newMessage}
           onChange={(e) => setNewMessage(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && sendMessage()}
         />
         <button
-          className="ml-3 px-4 py-2 bg-primary text-white rounded-lg"
+          className="ml-3 px-4 py-2 bg-primary text-text rounded-lg"
           onClick={sendMessage}
         >
           Send
