@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 
 const verifyToken = (req, res, next) => {
-  const token = req.cookies[`${process.env.COOKIE_NAME}` || "auth_token"];
+  const token = req.cookies[`${process.env.COOKIE_NAME}`];
 
   if (!token) {
     return res.json({ Error: "You are not authenticated" });

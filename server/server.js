@@ -92,11 +92,7 @@ app.post("/login", (req, res) => {
               path: "/",
             };
 
-            res.cookie(
-              process.env.COOKIE_NAME || "auth_token",
-              token,
-              cookieOptions
-            );
+            res.cookie(`${process.env.COOKIE_NAME}`, token, cookieOptions);
 
             return res.json({ status: "Success" });
           } else {
