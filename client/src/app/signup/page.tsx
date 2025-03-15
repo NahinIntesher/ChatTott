@@ -8,6 +8,7 @@ import Input from "../../components/ui/Input";
 import Link from "next/link";
 
 type SignupFormInputs = {
+  name: string;
   email: string;
   password: string;
   confirmPassword: string;
@@ -22,17 +23,37 @@ const Signup = () => {
     formState: { errors },
   } = useForm<SignupFormInputs>();
 
-  const onSubmit = (data: SignupFormInputs) => {
-    console.log("Form data submitted:", data); // Debugging
+  const onSubmit = async (data: SignupFormInputs) => {
+    try {
+      const response = await fetch("http://localhost:8000/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify({
+          name: data.name,
+          email: data.email,
+          password: data.password,
+        }),
+      });
 
-    if (data.password !== data.confirmPassword) {
-      setErrorMessage("Passwords do not match");
-      return;
+      const result = await response.json();
+
+      if (response.ok) {
+        setErrorMessage(null);
+        console.log("Signup successful, redirecting to login...");
+        router.push("/login");
+      } else {
+        console.log("Signup error", result.Error);
+        setErrorMessage(
+          result.Error || "Error during signup. Please try again."
+        );
+      }
+    } catch (error) {
+      console.log("Error during signup", error);
+      setErrorMessage("An error occurred, please try again later");
     }
-
-    // Simulating successful registration
-    console.log("Signup successful, redirecting...");
-    router.push("/login");
   };
 
   return (
@@ -50,6 +71,15 @@ const Signup = () => {
 
         {/* Form */}
         <form onSubmit={handleSubmit(onSubmit)} className="mt-4">
+          {/* Name Input */}
+          <Input
+            label="Name"
+            type="text"
+            placeholder="Enter your name"
+            {...register("name", { required: "Name is required" })}
+            error={errors.name?.message}
+          />
+
           {/* Email Input */}
           <Input
             label="Email"

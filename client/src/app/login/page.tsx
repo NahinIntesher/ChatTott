@@ -21,18 +21,39 @@ const Login = () => {
     formState: { errors },
   } = useForm<LoginFormInputs>();
 
-  const onSubmit = (data: LoginFormInputs) => {
-    console.log("Form data submitted:", data); // Debugging
-    if (data.email === "nahin@gmail.com" && data.password === "123456") {
-      setErrorMessage(null);
-      console.log("Login successful, redirecting..."); // Debugging
-      router.push("/chat");
-    } else {
-      console.log("Invalid credentials"); // Debugging
-      setErrorMessage("Invalid email or password");
+  const onSubmit = async (data: LoginFormInputs) => {
+    try {
+      console.log("Submitting login data:", data.email);
+
+      const response = await fetch("http://localhost:8000/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        mode: "cors",
+        body: JSON.stringify({
+          email: data.email,
+          password: data.password,
+        }),
+      });
+
+      const result = await response.json();
+      console.log("Login response:", result);
+
+      if (result.status === "Success") {
+        setErrorMessage(null);
+        console.log("Login successful, redirecting...");
+        router.replace("/chat");
+      } else {
+        console.log("Login failed:", result.Error);
+        setErrorMessage(result.Error || "Invalid email or password");
+      }
+    } catch (error) {
+      console.log("Error during login:", error);
+      setErrorMessage("An error occurred, please try again later");
     }
   };
-
   return (
     <div className="bg-[#f7f6e9] w-screen min-h-screen flex justify-center items-center px-4 text-black">
       <div className="bg-login-box-bg border border-card-border-light px-6 py-8 sm:px-8 sm:py-10 rounded-xl shadow-lg">

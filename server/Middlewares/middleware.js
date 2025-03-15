@@ -1,14 +1,14 @@
 const jwt = require("jsonwebtoken");
 
 const verifyToken = (req, res, next) => {
-  const token = req.cookies.userRegistered;
+  const token = req.cookies[`${process.env.COOKIE_NAME}` || "auth_token"];
 
   if (!token) {
     return res.json({ Error: "You are not authenticated" });
   }
 
   try {
-    const decoded = jwt.verify(token, "1234");
+    const decoded = jwt.verify(token, `${process.env.JWT_SECRET_KEY}`);
     req.userId = decoded.id;
     req.userType = decoded.type;
     next();
