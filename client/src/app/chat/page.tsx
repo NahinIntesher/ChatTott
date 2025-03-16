@@ -50,7 +50,6 @@ export default function Home() {
   }, []);
 
   const sendMessage = () => {
-    // console.log("Sending message:", message);
     if (message.trim() && socketRef.current) {
       if (socketRef.current.readyState === WebSocket.OPEN) {
         const messageData: Message = { username: "User", message };
@@ -73,7 +72,7 @@ export default function Home() {
       <div className="flex-1 overflow-y-auto p-4 space-y-3">
         {messages.length === 0 ? (
           <div>No messages yet</div>
-        ) : ( 
+        ) : (
           messages.map((msg, index) => (
             <div
               key={index}
@@ -96,10 +95,10 @@ export default function Home() {
       </div>
 
       {/* Chat Input */}
-      <div className="flex items-center p-3 border-t border-gray-300">
+      <div className="flex items-center p-3 border-t">
         <input
           type="text"
-          className="flex-1 p-2 border rounded-lg outline-none focus:ring-2 focus:ring-blue-500"
+          className="flex-1 p-2 border rounded-lg outline-none focus:ring focus:ring-border"
           placeholder="Type a message..."
           value={message}
           onChange={(e) => setMessage(e.target.value)}

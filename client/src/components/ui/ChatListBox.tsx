@@ -1,4 +1,5 @@
-import React, { Dispatch, SetStateAction } from "react";
+"use client";
+import React, { Dispatch, SetStateAction, use, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { FaUserCircle } from "react-icons/fa";
 import router from "next/router";
@@ -25,7 +26,7 @@ const ChatListBox: React.FC<ChatListBoxProps> = ({ chat, setSelectedChat }) => {
     <div
       key={chat.id}
       onClick={() => handleChatClick(chat.id)}
-      className="flex items-center p-4 hover:bg-gray-100 dark:hover:bg-gray-800 cursor-pointer"
+      className="flex items-center p-4 text-text hover:bg-gray-100 dark:hover:bg-gray-800 cursor-pointer"
     >
       <Image
         src={avater}

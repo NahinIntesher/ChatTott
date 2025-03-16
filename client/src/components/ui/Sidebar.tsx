@@ -21,19 +21,19 @@ export const Sidebar = () => {
   const router = useRouter();
   const [chats, setChats] = useState<any[]>([]);
 
+  const fetchChats = async () => {
+    const response = await fetch("http://localhost:8000/allusers", {
+      method: "GET",
+      credentials: "include",
+    });
+    if (response?.status == 200) {
+      const data = await response.json();
+      setChats(data.users);
+    } else {
+      console.error("Failed to fetch chats");
+    }
+  };
   useEffect(() => {
-    const fetchChats = async () => {
-      const response = await fetch("http://localhost:8000/allusers", {
-        method: "GET",
-        credentials: "include",
-      });
-      if (response?.status == 200) {
-        const data = await response.json();
-        setChats(data);
-      } else {
-        console.error("Failed to fetch chats");
-      }
-    };
     fetchChats();
   }, []);
 
@@ -45,7 +45,7 @@ export const Sidebar = () => {
       });
 
       if (response.ok) {
-        await router.push("/login");
+        router.push("/login");
       } else {
         console.error("Failed to logout");
       }
@@ -77,7 +77,7 @@ export const Sidebar = () => {
           <Link href={`/chat/${chat.id}`} key={chat.id}>
             <ChatListBox
               key={chat.id}
-              chat={chat.name}
+              chat={chat}
               setSelectedChat={setSelectedChat}
             />
           </Link>
