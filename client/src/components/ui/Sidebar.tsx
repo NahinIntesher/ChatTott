@@ -1,4 +1,11 @@
-import React, { Dispatch, SetStateAction, useMemo } from "react";
+"use client";
+import React, {
+  Dispatch,
+  SetStateAction,
+  use,
+  useEffect,
+  useMemo,
+} from "react";
 import Image from "next/image";
 import Link from "next/link";
 import SearchBox from "./SearchBar";
@@ -12,44 +19,41 @@ export const Sidebar = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedChat, setSelectedChat] = useState<number | null>(null);
   const router = useRouter();
+  const [chats, setChats] = useState<any[]>([]);
 
-  const chats = [
-    {
-      id: 1,
-      name: "John Doe",
-      lastMessage: "Hey, how are you?",
-      time: "2m ago",
-      unread: 2,
-    },
-    {
-      id: 2,
-      name: "Jane Smith",
-      lastMessage: "Meeting at 3 PM",
-      time: "1h ago",
-      unread: 0,
-    },
-    {
-      id: 3,
-      name: "Mike Johnson",
-      lastMessage: "Thanks for your help!",
-      time: "2h ago",
-      unread: 1,
-    },
-    {
-      id: 4,
-      name: "Sarah Wilson",
-      lastMessage: "Let's catch up soon",
-      time: "1d ago",
-      unread: 0,
-    },
-  ];
+  useEffect(() => {
+    const fetchChats = async () => {
+      const response = await fetch("http://localhost:8000/allusers", {
+        method: "GET",
+        credentials: "include",
+      });
+      if (response?.status == 200) {
+        const data = await response.json();
+        setChats(data);
+      } else {
+        console.error("Failed to fetch chats");
+      }
+    };
+    fetchChats();
+  }, []);
 
-  const handleLogout = () => {
-    console.log("Logging out...");
-    router.push("/login");
+  const handleLogout = async () => {
+    try {
+      const response = await fetch("http://localhost:8000/logout", {
+        method: "GET",
+        credentials: "include",
+      });
+
+      if (response.ok) {
+        await router.push("/login");
+      } else {
+        console.error("Failed to logout");
+      }
+    } catch (error) {
+      console.error("Logout error:", error);
+    }
   };
 
-  // Memoize the filteredChats list
   const filteredChats = useMemo(() => {
     return chats.filter((chat) =>
       chat.name.toLowerCase().includes(searchQuery.toLowerCase())
@@ -73,7 +77,7 @@ export const Sidebar = () => {
           <Link href={`/chat/${chat.id}`} key={chat.id}>
             <ChatListBox
               key={chat.id}
-              chat={chat}
+              chat={chat.name}
               setSelectedChat={setSelectedChat}
             />
           </Link>

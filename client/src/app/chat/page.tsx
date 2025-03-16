@@ -7,72 +7,73 @@ interface Message {
 }
 
 export default function Home() {
-  //   const [message, setMessage] = useState<string>("");
-  //   const [messages, setMessages] = useState<Message[]>([]);
-  //   const socketRef = useRef<WebSocket | null>(null);
+  const [message, setMessage] = useState<string>("");
+  const [messages, setMessages] = useState<Message[]>([]);
+  const socketRef = useRef<WebSocket | null>(null);
 
-  //   useEffect(() => {
-  //     const connectWebSocket = () => {
-  //       const socket = new WebSocket("ws://localhost:9000/ws");
+  useEffect(() => {
+    const connectWebSocket = () => {
+      const socket = new WebSocket("ws://localhost:9000/ws");
 
-  //       socket.onopen = () => {
-  //         console.log("✅ Connected to WebSocket");
-  //       };
+      socket.onopen = () => {
+        console.log("✅ Connected to WebSocket");
+      };
 
-  //       socket.onmessage = (event: MessageEvent) => {
-  //         try {
-  //           const newMessage: Message = JSON.parse(event.data);
-  //           setMessages((prevMessages) => [...prevMessages, newMessage]);
-  //         } catch (err) {
-  //           console.error("❌ Error parsing message:", err);
-  //         }
-  //       };
+      socket.onmessage = (event: MessageEvent) => {
+        try {
+          const newMessage: Message = JSON.parse(event.data);
+          setMessages((prevMessages) => [...prevMessages, newMessage]);
+        } catch (err) {
+          console.error("❌ Error parsing message:", err);
+        }
+      };
 
-  //       socket.onerror = (error) => {
-  //         console.log("❌ WebSocket Error:", error);
-  //       };
+      socket.onerror = (error) => {
+        console.log("❌ WebSocket Error:", error);
+      };
 
-  //       socket.onclose = () => {
-  //         console.warn("⚠️ WebSocket Disconnected. Reconnecting...");
-  //         setTimeout(connectWebSocket, 2000); // Reconnect after 2 seconds
-  //       };
+      socket.onclose = () => {
+        console.warn("⚠️ WebSocket Disconnected. Reconnecting...");
+        setTimeout(connectWebSocket, 2000); // Reconnect after 2 seconds
+      };
 
-  //       socketRef.current = socket;
-  //     };
+      socketRef.current = socket;
+    };
 
-  //     connectWebSocket();
+    connectWebSocket();
 
-  //     return () => {
-  //       if (socketRef.current) {
-  //         socketRef.current.close();
-  //       }
-  //     };
-  //   }, []);
+    return () => {
+      if (socketRef.current) {
+        socketRef.current.close();
+      }
+    };
+  }, []);
 
-  //   const sendMessage = () => {
-  //     if (message.trim() && socketRef.current) {
-  //       if (socketRef.current.readyState === WebSocket.OPEN) {
-  //         const messageData: Message = { username: "User", message };
-  //         socketRef.current.send(JSON.stringify(messageData));
-  //         setMessage("");
-  //       } else {
-  //         console.warn("⚠️ WebSocket not open. Cannot send message.");
-  //       }
-  //     }
-  //   };
+  const sendMessage = () => {
+    // console.log("Sending message:", message);
+    if (message.trim() && socketRef.current) {
+      if (socketRef.current.readyState === WebSocket.OPEN) {
+        const messageData: Message = { username: "User", message };
+        socketRef.current.send(JSON.stringify(messageData));
+        setMessage("");
+      } else {
+        console.warn("⚠️ WebSocket not open. Cannot send message.");
+      }
+    }
+  };
 
   return (
-    <div className="flex flex-col h-screen bg-gray-50 text-gray-900">
+    <div className="flex flex-col h-screen bg-bg text-text">
       {/* Header */}
       <header className="bg-bg text-text p-4">
         <h1 className="text-xl font-semibold">Real-time Chat</h1>
       </header>
 
       {/* Chat Messages */}
-      {/* <div className="flex-1 overflow-y-auto p-4 space-y-3 bg-white">
+      <div className="flex-1 overflow-y-auto p-4 space-y-3">
         {messages.length === 0 ? (
           <div>No messages yet</div>
-        ) : (
+        ) : ( 
           messages.map((msg, index) => (
             <div
               key={index}
@@ -92,10 +93,10 @@ export default function Home() {
             </div>
           ))
         )}
-      </div> */}
+      </div>
 
       {/* Chat Input */}
-      {/* <div className="flex items-center p-3 border-t border-gray-300 bg-white">
+      <div className="flex items-center p-3 border-t border-gray-300">
         <input
           type="text"
           className="flex-1 p-2 border rounded-lg outline-none focus:ring-2 focus:ring-blue-500"
@@ -110,7 +111,7 @@ export default function Home() {
         >
           Send
         </button>
-      </div> */}
+      </div>
     </div>
   );
 }

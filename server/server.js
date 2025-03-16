@@ -82,7 +82,6 @@ app.post("/login", (req, res) => {
                 expiresIn: `${process.env.JWT_EXPIRES_IN}`,
               }
             );
-            console.log(token);
 
             const cookieOptions = {
               expires: new Date(Date.now() + 1 * 24 * 60 * 60 * 1000),
@@ -130,9 +129,27 @@ app.get("/", verifyToken, (req, res) => {
   });
 });
 
+app.get("/allusers", async (req, res) => {
+  let query = `SELECT u.id, u.name, u.email FROM users AS u`;
+  connection.query(query, (err, results) => {
+    if (err) {
+      console.error("Error fetching user data:", err);
+      return res.status(500).json({ Error: "Error fetching user data" });
+    }
+
+    if (results.rows.length === 0) {
+      return res.status(404).json({ Error: "User not found" });
+    }
+    return res.json({
+      status: "Success",
+      users: results.rows,
+    });
+  });
+});
+
 app.get("/logout", (req, res) => {
   res.clearCookie(process.env.COOKIE_NAME);
-  res.json({ status: "Success" });
+  res.status(200).json({ status: "Success" });
 });
 
 const port = process.env.PORT || 8000;

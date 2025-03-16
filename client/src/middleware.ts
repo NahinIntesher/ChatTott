@@ -9,8 +9,11 @@ export default async function middleware(req: NextRequest) {
   const isPublicRoute = publicRoutes.includes(path);
   const token = (await cookies()).get(`${process.env.COOKIE_NAME}`)?.value;
 
-  if (isPublicRoute) {
+  if (isPublicRoute && !token) {
     return NextResponse.next();
+  }
+  if (isPublicRoute && token) {
+    return NextResponse.redirect(new URL("/chat", req.url));
   }
   if (!token) {
     return NextResponse.redirect(new URL("/login", req.url));
@@ -18,10 +21,8 @@ export default async function middleware(req: NextRequest) {
 
   try {
     await jwtVerify(token, new TextEncoder().encode(process.env.JWT_SECRET));
-    console.log("Token verified");
     return NextResponse.next();
   } catch (error) {
-    console.log("Token verification failed:", error);
     return NextResponse.redirect(new URL("/login", req.url));
   }
 }
